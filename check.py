@@ -1,7 +1,7 @@
 from pathlib import Path
 from keras.preprocessing.text import text_to_word_sequence
 import pslegal as psl
-#import NNP_extractor as npe
+##import NNP_extractor as npe
 
 path = "./Resourse/adv-hireinsharma-cases-docs/100588213"
 
