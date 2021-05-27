@@ -1,24 +1,18 @@
-from pathlib import Path
-from keras.preprocessing.text import text_to_word_sequence
 import pslegal as psl
+import nltk
 import NNP_extractor as npe
 
-path = "./Resource/adv-hireinsharma-cases-docs/100588213"
 
+
+path="./Resource/adv-hireinsharma-cases-docs/100588213"
 path1 = "./Resource/adv-hireinsharma-cases-docs/4096809"
+file_content = open(path).read()
+tokens = nltk.word_tokenize(file_content)
+file_content1 = open(path1).read()
+tokens1 = nltk.word_tokenize(file_content1)
 
-original_text= path
 
-text=Path(path).read_text()
-result = text_to_word_sequence(text)
-text1=Path(path1).read_text()
-result1 = text_to_word_sequence(text1) 
-
-#print(result)
-NNP_list = npe.start(text)
-#print('\n'.join(NNP_list))
-
-"""
+NNP_list = npe.start(file_content)
 legal_tokenized_documents = [['law','reports','or','reporters','are','series','of','books','that','contain','judicial','opinions','from','a','selection','of','case','law','decided','by','courts'],
 ['when','a','particular','judicial','opinion','is','referenced,','the','law','report','series','in','which','the','opinion','is','printed','will','determine','the','case','citation','format'],
 ] #two legal documents
@@ -30,18 +24,14 @@ nonlegal_tokenized_documents = [['the','data','is','organized','into','20','diff
 
 
 psvectorizer = psl.PSlegalVectorizer()
-psvectorizer.fit( legal_tokenized_documents, nonlegal_tokenized_documents)
+psvectorizer.fit(legal_tokenized_documents, nonlegal_tokenized_documents)
+psvectorizer.fit_doc(NNP_list)
+#print(psvectorizer.fit_doc(NNP_list))
 
-psvectorizer.fit_doc(result)
-phrase_score = psvectorizer.get_score(result1)
 
-print(phrase_score)
-"""
+#Then we use
+phrase_score = psvectorizer.get_score(['allegation']) # if was trained using tokenized words
+#print("\n",phrase_score)
 
-legal_tokenized_documents=NNP_list
-psvectorizer = psl.PSlegalVectorizer()
-psvectorizer.fit_legal(legal_tokenized_documents)
-psvectorizer.fit_doc(result)
-phrase_score = psvectorizer.get_score(['allegation','the' ,'supreme',' court'])
-print("\n",phrase_score)
-
+print("\nNNP_list:",len(tokens1))
+print("\nlegal token:",len(legal_tokenized_documents),len(legal_tokenized_documents[0]))
