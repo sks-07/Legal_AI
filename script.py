@@ -14,12 +14,13 @@ for entry in entries:
     file_content=open(path+entry).read()
     legal_doc.append(nltk.word_tokenize(file_content))
 
-test_doc = open('./105895179').read()
+test_doc = open('./test').read()
+test_token=nltk.word_tokenize(test_doc)
 
 NNP_list = npe.start(test_doc)
 psvectorizer = psl.PSlegalVectorizer()
 psvectorizer.fit_legal(legal_doc)
-psvectorizer.fit_doc(NNP_list)
+psvectorizer.fit_doc(test_token)
 
 comb=[]
 for key in NNP_list:

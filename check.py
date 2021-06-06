@@ -3,6 +3,7 @@ from keras.preprocessing.text import text_to_word_sequence
 import pslegal as psl
 import NNP_extractor as npe
 
+
 path = "./Resource/adv-hireinsharma-cases-docs/100588213"
 
 path1 = "./Resource/adv-hireinsharma-cases-docs/4096809"
