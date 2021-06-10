@@ -1,37 +1,60 @@
 import pslegal as psl
 import nltk
 import NNP_extractor as npe
+import os
+from sklearn.datasets import fetch_20newsgroups
+
+path="./Resource/adv-hireinsharma-cases-docs/"
+#nl_path="./archive/"
+entries = os.listdir(path)
+#entries1 = os.listdir(nl_path)
+legal_doc=[]
+nonlegal_doc=[]
+legal_content=[]
+nl_data = fetch_20newsgroups(remove = ('headers', 'footers', 'quotes'))
+
+for entry in entries:
+    file_content=open(path+entry).read()
+    legal_content.append(file_content)
+    legal_doc.append(nltk.word_tokenize(file_content))
+
+#for entry in entries1:
+#    file_content=open(nl_path+entry,'rb').read()
+#    nonlegal_doc.append(nltk.word_tokenize(file_content))
+
+for i in range(len(nl_data.data)):
+    nonlegal_doc.append(nltk.word_tokenize(nl_data.data[i]))
+
+"""
+f=open("check.txt",'a')
+for entry in entries:
+    file_content=open(path+entry).read()
+    f.write(file_content)
+f.close()
+"""
 
 
+test_doc = open('./check.txt').read()
+test_token=nltk.word_tokenize(test_doc)
+#NNP_list=[]
 
-path="./Resource/adv-hireinsharma-cases-docs/100588213"
-path1 = "./Resource/adv-hireinsharma-cases-docs/4096809"
-file_content = open(path).read()
-tokens = nltk.word_tokenize(file_content)
-file_content1 = open(path1).read()
-tokens1 = nltk.word_tokenize(file_content1)
-
-
-NNP_list = npe.start(file_content)
-legal_tokenized_documents = [['law','reports','or','reporters','are','series','of','books','that','contain','judicial','opinions','from','a','selection','of','case','law','decided','by','courts'],
-['when','a','particular','judicial','opinion','is','referenced,','the','law','report','series','in','which','the','opinion','is','printed','will','determine','the','case','citation','format'],
-] #two legal documents
-
-nonlegal_tokenized_documents = [['the','data','is','organized','into','20','different','newsgroups,','each','corresponding','to','a','different','topic'],
-['some','of','the','newsgroups','are','very','closely','related','to','each','other'],
-['the','following','file','contains','the','vocabulary','for','the','indexed','data'],
-] #three non-legal documents
-
-
+#for doc in legal_content:
+#    NNP_list.append(npe.start(doc))
+NNP_list = npe.start(test_doc)
 psvectorizer = psl.PSlegalVectorizer()
-psvectorizer.fit(legal_tokenized_documents, nonlegal_tokenized_documents)
-psvectorizer.fit_doc(NNP_list)
-#print(psvectorizer.fit_doc(NNP_list))
+psvectorizer.fit(legal_doc,nonlegal_doc)
+psvectorizer.fit_doc(test_token)
 
+comb=[]
+for key in NNP_list:
+    score=psvectorizer.get_score([key])
+    comb.append((key,score))
 
-#Then we use
-phrase_score = psvectorizer.get_score(['allegation']) # if was trained using tokenized words
-#print("\n",phrase_score)
+new_list= sorted(comb, key = lambda x: x[1])
+f=open("results.txt",'w')
+for element in new_list:
+    f.write(element)
 
-print("\nNNP_list:",len(tokens1))
-print("\nlegal token:",len(legal_tokenized_documents),len(legal_tokenized_documents[0]))
+f.close()
+print("completed")
+#print(*new_list, sep = "\n")
