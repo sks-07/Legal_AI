@@ -1,0 +1,32 @@
+Topic: 0
+Words: 0.022*"section" + 0.019*"evid" + 0.017*"state" + 0.015*"court" + 0.015*"deceas" + 0.014*"person" + 0.013*"record" + 0.013*"suicid" + 0.011*"accus" + 0.011*"appel"
+
+
+Topic: 1
+Words: 0.045*"petition" + 0.022*"respond" + 0.021*"shop" + 0.014*"court" + 0.014*"complain" + 0.014*"possess" + 0.011*"present" + 0.010*"section" + 0.010*"delhi" + 0.009*"petit"
+
+
+Topic: 2
+Words: 0.025*"document" + 0.021*"court" + 0.017*"section" + 0.016*"respond" + 0.015*"properti" + 0.015*"mutat" + 0.013*"petition" + 0.011*"say" + 0.009*"case" + 0.009*"order"
+
+
+Topic: 3
+Words: 0.047*"child" + 0.039*"court" + 0.037*"children" + 0.035*"section" + 0.025*"trial" + 0.023*"shall" + 0.017*"adult" + 0.016*"board" + 0.015*"case" + 0.015*"order"
+
+
+Topic: 4
+Words: 0.039*"petition" + 0.027*"complain" + 0.020*"court" + 0.016*"alleg" + 0.016*"applic" + 0.013*"bail" + 0.013*"accus" + 0.013*"section" + 0.012*"state" + 0.011*"prosecutrix"
+
+
+Topic: 5
+Words: 0.034*"section" + 0.028*"court" + 0.019*"offenc" + 0.015*"accus" + 0.014*"evid" + 0.014*"trial" + 0.012*"case" + 0.012*"inspector" + 0.012*"tyagi" + 0.012*"yashvir"
+
+
+Topic: 6
+Words: 0.038*"petition" + 0.020*"alleg" + 0.018*"section" + 0.017*"court" + 0.014*"charg" + 0.012*"accus" + 0.011*"case" + 0.011*"trial" + 0.011*"state" + 0.009*"order"
+
+
+Topic: 7
+Words: 0.029*"petition" + 0.022*"section" + 0.021*"date" + 0.020*"court" + 0.016*"appel" + 0.016*"order" + 0.012*"learn" + 0.011*"counsel" + 0.011*"submit" + 0.011*"offenc"
+
+
