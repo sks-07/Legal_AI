@@ -1,3 +1,0 @@
-#!/home/sks/files/Thesis/Legal_AI/project/bin/python
-from numba.pycc import main
-main()
