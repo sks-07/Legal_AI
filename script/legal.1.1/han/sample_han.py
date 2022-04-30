@@ -4,6 +4,8 @@
 import torch 
 import torch.nn as nn
 import json
+import os
+import nltk
 import torch.nn.functional as F
 #import argparse
 
@@ -17,7 +19,7 @@ class WordEncoder(nn.Module):
                               bidirectional=True)
 
     def forward(self,inp):
-        output = self.gru_layer(inp)
+        output,_ = self.gru_layer(inp)
         return output
 
 class WordAttn(nn.Module):
@@ -90,17 +92,23 @@ def main():
     with open(path,'r') as f:
         wdv=json.load(f)
 
+       
+    with open(r'D:\Thesis\Legal_AI\script\legal.1.1\facts\1440.txt', 'r',encoding="utf8") as f:
+        context=nltk.tokenize.sent_tokenize(f.read())
+        
     
+
     x=torch.Tensor(wdv['delhi']).reshape(1,1,len(wdv['delhi']))
     y=torch.Tensor(wdv['high']).reshape(1,1,len(wdv['high']))
     out=torch.cat((x,y),dim=0)
     ip=wd.forward(out)
 
-    batch_size = ip.size(dim=0)
-    num_sentences = ip.size(dim=1)
-    sentence_length = ip.size(dim=2)
-    input_size = ip.size(dim=3)
-    ip = ip.view(batch_size*num_sentences, sentence_length, input_size)
+    # batch_size = ip.size(dim=0)
+    
+    # num_sentences = ip.size(dim=1)
+    # sentence_length = ip.size(dim=2)
+    # input_size = ip.size(dim=3)
+    # ip = ip.view(batch_size*num_sentences, sentence_length, input_size)
 
     att=WordAttn(my_arg.input_dim,device='cpu')
     att.forward(ip)

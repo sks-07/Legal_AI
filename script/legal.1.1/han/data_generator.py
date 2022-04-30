@@ -328,10 +328,12 @@ class DataGenerator:
 
                 # Getting the embedding of each word
                 for word in words:
-                    sent_embed.append(
-                                self.embeddings.get(word,
-                                                    torch.zeros(embedding_dim)
-                                                    ))
+                    #sent_embed.append(self.embeddings.get(word,torch.zeros(embedding_dim)))
+                    try:
+                        sent_embed.append(torch.Tensor(self.embeddings[word]))
+                    except:
+                        sent_embed.append(torch.zeros(embedding_dim))
+
                 sent_embed = torch.stack(sent_embed, dim=0)
                 # Padding
                 if (sent_embed.size(0) < maximum):
@@ -441,9 +443,9 @@ class DataGenerator:
 
 
 def main():
-    data_paths = [(r"D:\Thesis\Final_Presentation\sentences")]
-    embed_path = (r"D:\Thesis\Final_Presentation\dict_200.pkl")
-    targets_paths = [(r"D:\Thesis\Final_Presentation\IPC_data\ipc_case_offences.json")]
+    data_paths = [(r"D:\Thesis\Legal_AI\script\legal.1.1\sen")]
+    embed_path = (r"D:\Thesis\Legal_AI\script\legal.1.1\dict_200.pkl")
+    targets_paths = [(r"D:\Thesis\Legal_AI\script\legal.1.1\IPC_data\ipc_case_offences.json")]
 
     data_gen = DataGenerator(data_paths=data_paths,
                              targets_paths=targets_paths,
