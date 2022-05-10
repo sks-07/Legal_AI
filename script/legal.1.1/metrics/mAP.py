@@ -146,8 +146,8 @@ def check(doc,case_to_adv):
 
 
 def main(foldnum):
-    path=rf"eval\sim_scores_0.json"
-    path1=rf"case_targets.json"  #case to advocate map file
+    path=rf"D:\Thesis\Legal_AI\script\legal.1.1\metric\Han\similarity_ranking.json"
+    path1=rf"D:\Thesis\Legal_AI\script\legal.1.1\IPC_data\case_targets.json"  #case to advocate map file
 
     f = open (os.path.join(path), "r")
     data = json.loads(f.read())
@@ -159,10 +159,10 @@ def main(foldnum):
     data1 = json.loads(f1.read())
 
     #print(data1['100416388'])
-    #score,ap=new_map(new_data,data1)
-    score=setup_3(new_data,data1)
+    score,ap=new_map(new_data,data1)
+    #score=setup_3(new_data,data1)
     print("score: ",score)
-    with open(rf'eval\map_setup_3_1.txt','w') as f:
+    with open(rf'D:\Thesis\Legal_AI\script\legal.1.1\metric\Han\map_setup_2_1.txt','w') as f:
         f.write(str(score))
 
 

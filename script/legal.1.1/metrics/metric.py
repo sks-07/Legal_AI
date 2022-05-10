@@ -186,11 +186,12 @@ def run_one_fold(numfold):
     """Carries out the metrics computation one one fold of an n-fold
     cross-validation setup."""
 
-    base_path = os.path.join(rf"eval\setup3", f"fold_{numfold}")
+    #base_path = os.path.join(rf"eval\setup3", f"fold_{numfold}")
+    base_path = r'D:\Thesis\Legal_AI\script\legal.1.1\metric\Han'
     if not(os.path.exists(base_path)):
         os.makedirs(base_path)
     
-    with open(r"eval\setup_3.json", 'r') as f:
+    with open(r"D:\Thesis\Legal_AI\script\legal.1.1\metric\Han\similarity_reranking.json", 'r') as f:
         scores = json.load(f)
     
     
@@ -205,7 +206,7 @@ def run_one_fold(numfold):
 
     adv_index = {k: i for i, k in enumerate(adv_list)}
 
-    with open(os.path.join("case_targets.json"), 'r') as f:
+    with open(r'D:\Thesis\Legal_AI\script\legal.1.1\IPC_data\case_targets.json', 'r') as f:
         targets = json.load(f)
 
     # Creating the ndarray to actual targets
